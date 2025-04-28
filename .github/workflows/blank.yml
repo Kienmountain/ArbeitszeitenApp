@@ -1,0 +1,32 @@
+name: Build Arbeitszeit Manager
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller
+        pip install -r requirements.txt
+
+    - name: Build exe
+      run: |
+        pyinstaller --onefile --noconsole arbeitszeit_manager.py
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: arbeitszeit_manager_exe
+        path: dist/arbeitszeit_manager.exe

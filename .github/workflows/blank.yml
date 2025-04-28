@@ -10,7 +10,8 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: .  # WICHTIG: Sagt GitHub, dass die Datei im Root liegt!
+        working-directory: arbeitszeit_manager.py  # Correct directory for the script
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
